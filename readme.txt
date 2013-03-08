@@ -1,4 +1,4 @@
-=== Udinra All Image Sitemap ===
+=== Udinra Mobile Sitemap ===
 Contributors: Udinra
 Donate link: http://udinra.com/
 Tags: xml sitemaps, google sitemaps, mobile sitemap, seo, search engines, sitemap,google mobile sitemap,wordpress seo
