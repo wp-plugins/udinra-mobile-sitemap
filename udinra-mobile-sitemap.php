@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Udinra Mobile Sitemap 
-Plugin URI: http://udinra.com/blog/google-mobile-sitemap-plugin-for-wordpress
+Plugin URI: https://udinra.com/blog/google-mobile-sitemap-plugin-for-wordpress
 Description: Automatically generates Google Mobile Sitemap and submits it to Google,Bing and Ask.com.
 Author: Udinra
-Version: 1.0
-Author URI: http://udinra.com
+Version: 1.1
+Author URI: https://udinra.com
 */
 
 function Udinra_Mobile() {
@@ -122,13 +122,13 @@ if($post != null) {
 if ( preg_match( '/^https/', $udinra_mob_pluginurl ) && !preg_match( '/^https/', get_bloginfo('url') ) )
 	$udinra_mob_pluginurl = preg_replace( '/^https/', 'http', $udinra_mob_pluginurl );
 
-//define( 'UDINRA_MOB_FRONT_URL', $udinra_mob_pluginurl );
+define( 'UDINRA_MOB_FRONT_URL', $udinra_mob_pluginurl );
 
 global $wpdb;
 
 if ($wp_udinra_mobile_page == true) {
 
-$udinra_pages_mobile = $wpdb->get_results("SELECT id FROM $wpdb->posts
+$udinra_pages_mobile = $wpdb->get_results("SELECT id,post_modified_gmt FROM $wpdb->posts
 				 			WHERE post_type = 'page'
 							and post_status = 'publish'
 							ORDER BY post_date desc");
@@ -136,7 +136,7 @@ $udinra_pages_mobile = $wpdb->get_results("SELECT id FROM $wpdb->posts
 
 if ($wp_udinra_mobile_post == true) {
 
-$udinra_posts_mobile = $wpdb->get_results("SELECT id FROM $wpdb->posts
+$udinra_posts_mobile = $wpdb->get_results("SELECT id,post_modified_gmt FROM $wpdb->posts
 				 			WHERE post_type = 'post'
 							and post_status = 'publish'
 							ORDER BY post_date desc");
@@ -148,7 +148,7 @@ if (empty ($udinra_posts_mobile) && empty ($udinra_pages_mobile)) {
 
 } else {
 	$udinra_xml_mobile   = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-/*	$udinra_xml_mobile  .= '<?xml-stylesheet type="text/xsl" href='.'"'. UDINRA_MOB_FRONT_URL . 'xml-mobile-sitemap.xsl'. '"'.'?>' . "\n"; */
+	$udinra_xml_mobile  .= '<?xml-stylesheet type="text/xsl" href='.'"'. UDINRA_MOB_FRONT_URL . 'xml-mobile-sitemap.xsl'. '"'.'?>' . "\n"; 
 	$udinra_xml_mobile  .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">' . "\n";
 	
 	if (empty ($udinra_pages_mobile)) { }
@@ -157,6 +157,9 @@ if (empty ($udinra_posts_mobile) && empty ($udinra_pages_mobile)) {
 			$udinra_page_url_mobile = get_permalink($udinra_page_mobile->id);
 			$udinra_xml_mobile .= "\t"."<url>"."\n";
 			$udinra_xml_mobile .= "\t\t"."<loc>".htmlspecialchars($udinra_page_url_mobile)."</loc>"."\n";
+			$udinra_dateTime = new DateTime($udinra_page_mobile->post_modified_gmt);
+			$udinra_xml_mobile .= "\t\t"."<lastmod>".$udinra_dateTime->format(DateTime::W3C)."</lastmod>"."\n";
+			$udinra_xml_mobile .= "\t\t"."<priority>"."0.8"."</priority>"."\n";
 			$udinra_xml_mobile .= "\t\t"."<mobile:mobile/>"."\n";
 			$udinra_xml_mobile .= "\t"."</url>"."\n";
 			
@@ -169,6 +172,9 @@ if (empty ($udinra_posts_mobile) && empty ($udinra_pages_mobile)) {
 			$udinra_post_url_mobile = get_permalink($udinra_post_mobile->id);
 			$udinra_xml_mobile .= "\t"."<url>"."\n";
 			$udinra_xml_mobile .= "\t\t"."<loc>".htmlspecialchars($udinra_post_url_mobile)."</loc>"."\n";
+			$udinra_dateTime = new DateTime($udinra_post_mobile->post_modified_gmt);
+			$udinra_xml_mobile .= "\t\t"."<lastmod>".$udinra_dateTime->format(DateTime::W3C)."</lastmod>"."\n";
+			$udinra_xml_mobile .= "\t\t"."<priority>"."0.6"."</priority>"."\n";
 			$udinra_xml_mobile .= "\t\t"."<mobile:mobile/>"."\n";
 			$udinra_xml_mobile .= "\t"."</url>"."\n";
 		
@@ -239,7 +245,7 @@ function udinra_mobile_sitemap_admin() {
 
 function UdinraWritableMobile($udinra_filename_m) {
 	if(!is_writable($udinra_filename_m)) {
-		$udinra_sitemap_response_m = "The file sitemap-mobile.xml is not writable please check permission of the file for more details visit http://udinra.com/blog/udinra-mobile-sitemap";
+		$udinra_sitemap_response_m = "The file sitemap-mobile.xml is not writeable please check permission of the file for more details visit http://udinra.com/blog/udinra-mobile-sitemap";
 		return false;
 	}
 	return true;
