@@ -4,7 +4,7 @@ Plugin Name: Udinra Mobile Sitemap
 Plugin URI: https://udinra.com/blog/google-mobile-sitemap-plugin-for-wordpress
 Description: Automatically generates Google Mobile Sitemap and submits it to Google,Bing and Ask.com.
 Author: Udinra
-Version: 1.1
+Version: 1.2
 Author URI: https://udinra.com
 */
 
@@ -67,8 +67,7 @@ $udinra_sitemap_response_m = udinra_mobile_sitemap_loop();
 <p><?php echo "Status:"."<br><br>".$udinra_sitemap_response_m; ?></p>
 </fieldset>
 </form>
-<p>You can report all bugs,feature requests and other queries related to this version of plugin at 
-<a href="http://udinra.com/blog/google-mobile-sitemap-plugin-for-wordpress">Support Forum</a></p>
+<p>Get Lifetime free updates and eCommerce plugin support <a href="http://udinra.com/blog/google-mobile-sitemap-plugin-for-wordpress">Buy Udinra Mobile Sitemap Pro</a></p>
 <table>
 <tr><td>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">  
