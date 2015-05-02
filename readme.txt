@@ -3,15 +3,15 @@ Contributors: Udinra
 Donate link: https://udinra.com/
 Tags: xml sitemaps, google sitemaps, mobile sitemap, seo, search engines, sitemap,google mobile sitemap,wordpress seo
 Requires at least: 2.1
-Tested up to: 4.0
-Stable tag: 1.1
+Tested up to: 4.2.1
+Stable tag: 1.2
 License: GPLv2 or later
 
 Automatically creates Mobile sitemap and pings Google,Bing and Ask.com
 
 == Description ==
 
-Automatically creates Google XML sitemap for Mobile and pings Google,Bing and Ask.com.Must have plugin if you want to rank better in Google Mobile search.
+Automatically creates Google XML sitemap for Mobile and pings Google,Bing and Ask.com.Must have plugin if you want to rank better in Google Mobile search.Mobile is next way Internet is moving.So give tell Google about your mobile friendly content for better mobile search visibility.
 
 <a href="https://udinra.com/blog/google-mobile-sitemap-plugin-for-wordpress">Pro Version of plugin</a> supports WooCommerce plugin and Easy Digital Download plugin.
 
@@ -40,6 +40,10 @@ Screen shot
 
 == Changelog ==
 
+= 1.2 =
+
+Small fixes.
+
 = 1.1 =
 
 Added other optional sitemap tags like Lastmod and Priority
@@ -51,6 +55,6 @@ Initial version
 
 == Upgrade Notice ==
 
-= 1.1 =
+= 1.2 =
 
-Get more enhanced Mobile Sitemap with Readable Sitemap and Additional Sitemap protocol tags.
+New version compatible with latest version of WordPress 4.2.1
